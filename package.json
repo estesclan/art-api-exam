@@ -1,7 +1,7 @@
 {
-	"name": "art-api-exam",
+	"name": "PeterArt",
 	"version": "1.0.0",
-	"description": "",
+	"description": "An API to manage paintings",
 	"main": "app.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",

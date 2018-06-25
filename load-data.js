@@ -3,6 +3,7 @@ const PouchDB = require("pouchdb")
 const db = new PouchDB(
 	`${process.env.COUCH_HOSTNAME}${process.env.COUCH_DBNAME}`
 )
+
 const paintings = [
 	{
 		_id: "painting_starry_night",
@@ -62,3 +63,11 @@ const paintings = [
 		museum: { name: "Musée d’Orsay", location: "Paris" }
 	}
 ]
+db.bulkDocs(paintings, function(err, result) {
+	if (err) {
+		console.log("ERROR", JSON.stringify(err))
+		return
+	}
+
+	console.log("SUCCESS!", JSON.stringify(result, null, 2))
+})
