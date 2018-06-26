@@ -5,6 +5,7 @@ require("dotenv").config()
 
 const { merge, prop, map, toLower } = require("ramda")
 const pkGen = require("./lib/pk-gen")
+const cleanString = require("./lib/remove-a-the")
 
 const db = new PouchDB(
 	`${process.env.COUCH_HOSTNAME}${process.env.COUCH_DBNAME}`
@@ -18,7 +19,7 @@ const addPainting = (painting, callback) => {
 
 	const modifiedPainting = merge(painting, {
 		type: "painting",
-		_id: `painting_${toLower(painting.name)}`
+		_id: `painting_${cleanString(painting.name)}`
 	})
 	//console.log("modifiedPainting", modifiedPainting)
 	db.put(modifiedPainting, callback)

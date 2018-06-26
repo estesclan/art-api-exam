@@ -8,6 +8,7 @@ const { pathOr, propOr, isEmpty, compose, not, join } = require("ramda")
 const checkRequiredFields = require("./lib/check-required-fields")
 const createMissingFieldMsg = require("./lib/create-missing-field-msg")
 const cleanObj = require("./lib/clean-obj")
+
 const {
 	getPainting,
 	deletePainting,
@@ -52,7 +53,7 @@ app.get("/paintings", function(req, res, next) {
 
 app.post("/paintings", function(req, res, next) {
 	const newPainting = propOr({}, "body", req)
-	console.log("newPainting", newPainting)
+	//console.log("newPainting", newPainting)
 	if (isEmpty(newPainting)) {
 		next(
 			new NodeHTTPError(
@@ -109,10 +110,10 @@ app.put("/paintings/:paintingID", function(req, res, next) {
 			new NodeHTTPError(400, ` ${createMissingFieldMsg(missingMuseumFields)}`)
 		)
 	}
-
-	if (!paintingToUpdate._rev) {
-		next(new NodeHTTPError(409, `Please include the most recent _rev value`))
-	}
+	//couch does this!
+	// if (!paintingToUpdate._rev) {
+	// 	next(new NodeHTTPError(409, `Please include the most recent _rev value`))
+	// }
 
 	const cleanedPainting = cleanObj(requiredFields, paintingToUpdate)
 
